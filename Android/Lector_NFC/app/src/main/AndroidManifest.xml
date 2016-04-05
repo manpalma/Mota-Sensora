@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.manuel_mac.lector_nfc" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+
+        <!-- Nos aseguramos que la API pueda gestionar NFC -->
+        <uses-sdk android:minSdkVersion="10" />
+
+        <!-- Le damos a nuestra aplicación permiso para utilizar el NFC del dispositivo -->
+        <uses-permission android:name="android.permission.NFC" />
+
+        <!-- Nuestra aplicación no se podrá descargar si no tenemos un dispositivo con NFC -->
+        <uses-feature
+            android:name="android.hardware.nfc"
+            android:required="true" />
+
+
+        <activity android:name=".MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+
+        </activity>
+        <activity android:name=".Intermedia" >
+            <!--
+       Especificar que nuestra aplicación sea la que más prioridad tiene a la hora de leer
+       y gestionar una tag NFC en caso de que haya más app en el dispositivo (NDEF es el tipo
+       con más prioridad)
+           -->
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".resultado" >
+        </activity>
+    </application>
+
+</manifest>
